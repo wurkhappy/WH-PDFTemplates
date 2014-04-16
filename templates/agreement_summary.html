@@ -1,0 +1,110 @@
+<style>
+@import url(https://d3kq8dzp7eezz0.cloudfront.net/css-35/landing.css);
+
+.p {
+	margin-bottom: 11px;
+}
+
+.checkbox {
+	background: hsl(0, 100%, 100%);
+	border-radius: 3px;
+	border: 2px solid hsl(0, 0%, 50%);
+	font-weight: bold;
+	position: absolute;
+	left: -2px;
+	line-height: 16px;
+	overflow: hidden;
+	text-align: center;
+	text-indent: 100%;
+	top: 11px;
+	height: 18px;
+	width: 18px;
+	white-space: nowrap;
+	padding: 3px 0;
+}
+
+.task {
+	text-align: left;
+	position: relative;
+	top: 10px;
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: 300;
+	left:25px;
+}
+
+.task_item {
+	text-align: left;
+	position: relative;
+	top: -2px;
+	font-size: 16px;
+	line-height: 20px;
+	font-weight: 300;
+	margin-top:4px;
+}
+</style>
+
+
+<body style="background-color:white;">
+<div style="position:relative;overflow:hidden;width:1102px;margin:60px auto; border: 1px solid hsl(200, 82%, 43%);">
+	<div style="background-color: hsl(200, 80%, 43%);padding: 35px 50px 25px;overflow:hidden;">
+		<div style="float:left;width:640px;">
+			<h1 style="color: hsl(0, 100%, 100%);margin: 0;padding: 0;font-size: 32px;line-height: 50px;font-weight: 300;">{{.Agreement.Name}}</h1>
+			<h2 style="text-align: left;padding: 0;margin: 0;line-height: 20px;color: hsl(0, 100%, 100%);font-family: museo_sans;font-size: 16px;font-weight: 300;text-transform:uppercase;">{{.DateNow}}</h2>
+		</div>
+		<div style="float:right;width:280px;margin-top:9px;">
+			<h2 style="text-align: right;padding: 0;margin: 0;line-height: 20px;color: hsl(0, 100%, 100%);font-family: museo_sans;font-size: 16px;font-weight: 300;">
+				{{.Freelancer.firstName}} {{.Freelancer.lastName}}</h2>
+				<p class="p" style="color: hsl(0, 100%, 100%);text-transform: uppercase;font-weight: 300;font-size: 10px;font-family: museo_sans;font-style: normal;text-align:right;margin:0;">{{.Freelancer.email}}</p>
+				<p class="p" style="color: hsl(0, 100%, 100%);text-transform: uppercase;font-weight: 300;font-size: 10px;font-family: museo_sans;font-style: normal;text-align:right;margin:0;">Freelancer</p>
+			</div>
+		</div>
+		<div style="clear:both;"></div>
+		<div style="padding:20px 30px 30px 30px;float:left;width:640px;margin-top:20px">
+			<h2 style="color: hsl(198, 100%, 35%);font-weight: 300;margin: 0;padding: 0;font-size:24px;line-height:38px;">Tasks</h2>
+			<ul style="margin:0 0 20px 0;padding: 0;list-style: none;">
+				{{range .Tasks}}
+				<li style="border-bottom: 1px dashed hsl(186, 34%, 84%);padding: 15px 5px;list-style: none;overflow: hidden;">
+					<h3 style="font-size: 18px;line-height: 29px;font-weight: 300;text-transform: uppercase;color: hsl(198, 100%, 35%);float:left;">{{.title}}</h3>
+					<span style="display: block;font-size: 12px;color: hsl(0, 0%, 50%);margin: 0 0 10px 0;text-align: left;font-weight: 500;float:right;color:hsl(38, 100%, 50%);">Due {{.dateExpected | formatDate}}</span>
+					<ul style="list-style-type: none;margin: 0;margin-bottom: 10px;padding-left:20px;list-style:none;clear:both;">
+						{{range .subTasks}}
+						<li class="task_item">
+							<div class="checkbox"></div>
+							<div class="task">{{.title}}</div>
+						</li>
+						{{end}}
+					</ul>
+				</li>
+				{{end}}
+			</ul>
+
+		</div>
+		<div style="padding:20px 30px 30px 30px;float:right;background: hsl(0,0%,96%);width:380px;margin:30px;">
+			<h2 style="color: hsl(198, 100%, 35%);margin: 0;padding: 0;font-weight: 100;font-size: 22px;">Agreement Overview</h2>
+			<div>
+				{{.ProposedServices}}
+			</div>
+			<h2 style="color: hsl(198, 100%, 35%);margin: 0;padding: 0;font-weight: 100;font-size: 22px;">Payment Schedule</h2>
+			<ul style="list-style:none;">
+				<li>
+					{{range .Payments}}
+					<div><span style="">{{.title}}</span> <span style="color: hsl(0, 0%, 39%);float:right;">${{.amountDue}}</span></div>
+					{{if .isDeposit}}{{else}}
+					<span style="display: block;font-size: 12px;color: hsl(0, 0%, 50%);margin: 0 0 10px 0;text-align: left;font-weight: 500;font-style: italic;margin-left: 11px;margin-top: -2px;">Expected on {{.dateExpected | formatDate}}</span>
+					{{end}}
+					{{end}}
+				</li>
+
+			</ul>
+
+			<div style="font-size: 16px;text-transform: uppercase;font-weight: 900;color: hsl(0, 0%, 39%);"> <span style="float:left:">Total:</span> <span style="float:right;">${{.Total}}</span> </div>
+		</div>
+		<div style="clear:both;"></div>
+		<div style="width:640px;position:relative;bottom:0;padding:30px;">
+			<p class="p" style="font-size: 12px;font-weight: 900;margin:0;font-style:italic;color:hsl(95, 56%, 57%);">Need to check the work status, amend the agreement, or handle payment?</p>
+			<p class="p" style="margin: 0;text-transform: uppercase;font-size: 12px;font-weight: 300;">Go to <span style="color:hsl(198, 100%, 35%);font-weight: 600;text-transform: lowercase;font-size: 14px;">https://www.wurkhappy.com/#login</span> in your web browser.</p>
+		</div>
+	</div>
+</div>
+</body>
