@@ -1,5 +1,5 @@
 <style>
-@import url(https://d3kq8dzp7eezz0.cloudfront.net/css-35/landing.css);
+@import url(https://d3kq8dzp7eezz0.cloudfront.net/css/pdf.css);
 
 .p {
 	margin-bottom: 11px;
@@ -44,15 +44,14 @@
 }
 </style>
 
-
-<body style="background-color:white;">
-<div style="position:relative;overflow:hidden;width:1102px;margin:60px auto; border: 1px solid hsl(200, 82%, 43%);">
+<body style="background-color:white;min-width:1100px;">
+<div style="position:relative;overflow:hidden;width:100%;margin:60px auto; border: 1px solid hsl(200, 82%, 43%);">
 	<div style="background-color: hsl(200, 80%, 43%);padding: 35px 50px 25px;overflow:hidden;">
-		<div style="float:left;width:640px;">
+		<div style="float:left;width:60%;">
 			<h1 style="color: hsl(0, 100%, 100%);margin: 0;padding: 0;font-size: 32px;line-height: 50px;font-weight: 300;">{{.Agreement.Name}}</h1>
 			<h2 style="text-align: left;padding: 0;margin: 0;line-height: 20px;color: hsl(0, 100%, 100%);font-family: museo_sans;font-size: 16px;font-weight: 300;text-transform:uppercase;">{{.DateNow}}</h2>
 		</div>
-		<div style="float:right;width:280px;margin-top:9px;">
+		<div style="float:right;width:30%;margin-top:9px;">
 			<h2 style="text-align: right;padding: 0;margin: 0;line-height: 20px;color: hsl(0, 100%, 100%);font-family: museo_sans;font-size: 16px;font-weight: 300;">
 				{{.Freelancer.firstName}} {{.Freelancer.lastName}}</h2>
 				<p class="p" style="color: hsl(0, 100%, 100%);text-transform: uppercase;font-weight: 300;font-size: 10px;font-family: museo_sans;font-style: normal;text-align:right;margin:0;">{{.Freelancer.email}}</p>
@@ -60,7 +59,7 @@
 			</div>
 		</div>
 		<div style="clear:both;"></div>
-		<div style="padding:20px 30px 30px 30px;float:left;width:640px;margin-top:20px">
+		<div style="padding:20px 30px 30px 30px;float:left;width:60%;margin-top:20px">
 			<h2 style="color: hsl(198, 100%, 35%);font-weight: 300;margin: 0;padding: 0;font-size:24px;line-height:38px;">Tasks</h2>
 			<ul style="margin:0 0 20px 0;padding: 0;list-style: none;">
 				{{range .Tasks}}
@@ -80,7 +79,7 @@
 			</ul>
 
 		</div>
-		<div style="padding:20px 30px 30px 30px;float:right;background: hsl(0,0%,96%);width:380px;margin:30px;">
+		<div style="padding:20px 30px 30px 30px;float:right;background: hsl(0,0%,96%);width:30%;margin:30px;">
 			<h2 style="color: hsl(198, 100%, 35%);margin: 0;padding: 0;font-weight: 100;font-size: 22px;">Agreement Overview</h2>
 			<div>
 				{{.ProposedServices}}
