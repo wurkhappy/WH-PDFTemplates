@@ -47,7 +47,7 @@ p {
 	padding: 10px;
 }
 
-.task_item:nth-child(even) {
+.task_item:nth-child(odd) {
 	background: hsl(0, 0%, 96%);
 }
 
@@ -75,13 +75,13 @@ p {
 <body style="background-color:white;min-width:1100px;">
 	<div style="position:relative;overflow:hidden;width:100%;margin:60px auto; border: 1px solid hsl(200, 82%, 43%);">
 		<div style="background-color: hsl(200, 80%, 43%);padding: 35px 50px 25px;overflow:hidden;">
-			<div style="float:left;width:300px;">
+			<div style="float:left;">
 				<h1 style="color:white;font-weight: 100;font-family: museo_sans;text-transform: uppercase;font-size: 31px;margin:4px 0;">Invoice {{.Payment.Number}}</h1>
 				<h2 style="text-align: left;padding: 0;margin: 0;line-height: 20px;color: hsl(0, 100%, 100%);font-family: museo_sans;font-size: 12px;font-weight: 300;margin-top: -10px;font-style: italic;">{{.DateNow}}</h2>
 				<h2 style="margin: 0;padding: 0;line-height: 20px;color: hsl(0, 100%, 100%);font-family: museo_sans;font-size: 16px;font-weight: 300;margin-top: 15px;">{{.Client.firstName}} {{.Client.lastName}}</h2>
 				<p style="color: hsl(0, 100%, 100%);text-transform: uppercase;font-weight: 300;font-size: 10px;font-family: museo_sans;font-style: normal;text-align:left;margin:0;">Client</p>
 			</div>
-			<div style="float:right;width:490px;">
+			<div style="float:right;">
 				<h1 style="color: hsl(0, 100%, 100%);margin: 0;padding: 0;font-size: 40px;line-height: 50px;font-weight: 300;margin-top: 4px;text-align:right;">{{.Agreement.Name}}</h1>
 				<h2 style="text-align: right;padding: 0;margin: 0;line-height: 20px;color: hsl(0, 100%, 100%);font-family: museo_sans;font-size: 16px;font-weight: 300;margin-top: 34px;">
 					{{.Freelancer.firstName}} {{.Freelancer.lastName}}</h2>
