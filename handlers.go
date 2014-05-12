@@ -115,7 +115,7 @@ type Task struct {
 func invoice(params map[string]interface{}, body []byte) ([]byte, error, int) {
 	var data struct {
 		Agreement  *Agreement             `json:"agreement"`
-		Payment    Payment                `json:"payment"`
+		Payment    *Payment               `json:"payment"`
 		Tasks      []*Task                `json:"tasks"`
 		Freelancer map[string]interface{} `json:"freelancer"`
 		Client     map[string]interface{} `json:"client"`
