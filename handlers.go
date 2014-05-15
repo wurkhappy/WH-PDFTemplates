@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"html/template"
+	"sort"
 	"time"
 )
 
@@ -17,13 +18,15 @@ func unescaped(x string) interface{} { return template.HTML(x) }
 func agreement(params map[string]interface{}, body []byte) ([]byte, error, int) {
 	var data struct {
 		Agreement  *Agreement               `json:"agreement"`
-		Payments   []*Payment               `json:"payments"`
+		Payments   Payments                 `json:"payments"`
 		Tasks      []map[string]interface{} `json:"tasks"`
 		Freelancer map[string]interface{}   `json:"freelancer"`
 	}
 	json.Unmarshal(body, &data)
 	agreement := data.Agreement
 	payments := data.Payments
+	sort.Sort(Payments(payments))
+
 	tasks := data.Tasks
 	freelancer := data.Freelancer
 	var paymentTotal float64
@@ -36,7 +39,6 @@ func agreement(params map[string]interface{}, body []byte) ([]byte, error, int) 
 	}
 
 	m := map[string]interface{}{
-		"PAYMENT_NUMBER":   1,
 		"Agreement":        agreement,
 		"ProposedServices": unescaped(agreement.ProposedServices),
 		"Tasks":            tasks,
@@ -110,12 +112,17 @@ type Task struct {
 	Title        string    `json:"title"`
 	DateExpected time.Time `json:"dateExpected"`
 }
+type Payments []*Payment
+
+func (a Payments) Len() int           { return len(a) }
+func (a Payments) Swap(i, j int)      { a[i], a[j] = a[j], a[i] }
+func (a Payments) Less(i, j int) bool { return a[i].Number < a[j].Number }
 
 func invoice(params map[string]interface{}, body []byte) ([]byte, error, int) {
 	var data struct {
 		Agreement  *Agreement             `json:"agreement"`
 		Payment    *Payment               `json:"payment"`
-		Payments   []*Payment             `json:"payments"`
+		Payments   Payments               `json:"payments"`
 		Tasks      []*Task                `json:"tasks"`
 		Freelancer map[string]interface{} `json:"freelancer"`
 		Client     map[string]interface{} `json:"client"`
@@ -166,7 +173,6 @@ func invoice(params map[string]interface{}, body []byte) ([]byte, error, int) {
 	}
 
 	m := map[string]interface{}{
-		"PAYMENT_NUMBER":   1,
 		"Agreement":        agreement,
 		"ProposedServices": unescaped(agreement.ProposedServices),
 		"Tasks":            tasks,
